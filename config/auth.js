@@ -6,7 +6,7 @@ module.exports = {
     'facebookAuth' : {
         'clientID'      : '976738042535147', // your App ID
         'clientSecret'  : 'c2d05c785852f34475d045b9efe0a046', // your App Secret
-        'callbackURL'   : 'https://mlab.com/databases/first_mongodb/collections/users',
+        'callbackURL'   : 'https://test-web-app78.herokuapp.com/auth/facebook/callback',
         'profileURL'    : 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
         'profileFields' : ['id', 'email', 'name'] // For requesting permissions from Facebook API
     },
