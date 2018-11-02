@@ -4,6 +4,7 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var configAuth = require('./auth');
@@ -207,6 +208,42 @@ module.exports = function(passport) {
         });
 
     }));
+
+    passport.use(new LinkedInStrategy({
+        clientID: configAuth.linkedinAuth.clientID,
+        clientSecret: configAuth.linkedinAuth.clientSecret,
+        callbackURL: configAuth.linkedinAuth.callbackURL,
+        scope: ['r_emailaddress', 'r_basicprofile'],
+      }, function(token, refreshToken, profile, done) {
+        process.nextTick(function () {
+            User.findOne({ 'linkedin.id' : profile.id }, function(err, user) {
+                if (err)
+                    return done(err);
+
+                if (user) {
+
+                    // if a user is found, log them in
+                    return done(null, user);
+                } else {
+                    // if the user isnt in our database, create a new user
+                    var newUser          = new User();
+
+                    // set all of the relevant information
+                    newUser.linkedin.id    = profile.id;
+                    newUser.linkedin.token = token;
+                    newUser.linkedin.name  = profile.displayName;
+                    newUser.linkedin.email = profile.email;
+
+                    // save the user
+                    newUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+      }));
 
 };
 

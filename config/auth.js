@@ -21,6 +21,12 @@ module.exports = {
         'clientID'      : '1086343707706-v3gkf9oe36qqq3pfnp2si53iv9j66i8k.apps.googleusercontent.com',
         'clientSecret'  : 'gAkZ0lJS1C-YZguFs-NlSmlE',
         'callbackURL'   : 'https://test-web-app78.herokuapp.com/auth/google/callback'
-    }
+    },
+
+    linkedinAuth: {
+        clientID: '7778k55k53z6b5',
+        clientSecret: 'atnJavoqLV0uLB0J',
+        callbackURL: 'https://test-web-app78.herokuapp.com/auth/linkedin/callback'
+       }
 
 };

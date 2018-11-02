@@ -84,6 +84,14 @@ module.exports = function(app, passport) {
                 successRedirect : '/profile',
                 failureRedirect : '/'
             }));
+
+    app.get('/auth/linkedin', passport.authenticate('linkedin'));
+
+    app.get('/auth/linkedin/callback',
+              passport.authenticate('linkedin', { 
+                successRedirect : '/profile',
+                failureRedirect: '/' 
+            }));
           
           
       
