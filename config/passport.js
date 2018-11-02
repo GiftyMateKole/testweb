@@ -232,7 +232,7 @@ module.exports = function(passport) {
                     newUser.linkedin.id    = profile.id;
                     newUser.linkedin.token = token;
                     newUser.linkedin.name  = profile.displayName;
-                    newUser.linkedin.email = profile.email;
+                    newUser.linkedin.email = profile.emails[0].value;
 
                     // save the user
                     newUser.save(function(err) {
